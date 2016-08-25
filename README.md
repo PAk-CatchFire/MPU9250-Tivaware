@@ -12,3 +12,5 @@ For TM4C129X devices:
 
 
 ![ScreenShot](https://github.com/PAk-CatchFire/MPU9250-Tivaware/blob/master/MPU9250.PNG = 250x)
+
+<img src="http://des.igogo.es/uploads/2015/201509/heditor/201509231442478751.jpg" width="48">
