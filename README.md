@@ -1,7 +1,7 @@
 # MPU9250-Tivaware
 An i2c MPU9250 with TM4C129X Tivaware first approach
 
-![ScreenShot](http://hobbycomponents.com/1844-large_default/mpu9250-9-axis-9dof-acc-gyro-compass-module.jpg)
+![ScreenShot](http://des.igogo.es/uploads/2015/201509/heditor/201509231442478751.jpg)
 
 Processing sketch for real time viewing included:
 
