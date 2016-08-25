@@ -1,5 +1,7 @@
 #include "../include.h"
+#include "MPU9250.h"
 
+/*
 #define DWT_O_CYCCNT 				0x00000004
 
 float pfData[16];
@@ -53,9 +55,9 @@ void EnableBenchmarkingCode(void) {
 	//Needed for the Now() function
 	static int enabled = 0;
 	if (!enabled) {
-		HWREG(NVIC_DBG_INT) |= 0x01000000; /*enable TRCENA bit in NVIC_DBG_INT*/
-		HWREG(DWT_BASE + DWT_O_CYCCNT) = 0; /* reset the counter */
-		HWREG(DWT_BASE) |= 0x01; /* enable the counter */
+		HWREG(NVIC_DBG_INT) |= 0x01000000; //enable TRCENA bit in NVIC_DBG_INT//
+		HWREG(DWT_BASE + DWT_O_CYCCNT) = 0; // reset the counter //
+		HWREG(DWT_BASE) |= 0x01; /* enable the counter //
 		enabled = 1;
 	}
 }
@@ -110,6 +112,14 @@ float q3 = 0;
 
 float pitch, yaw, roll;
 
+
+bool samplingFlag = false;
+uint32_t cycles1 = 0;
+uint32_t cycles1_ant = 0;
+float cycles1f = 0;
+float CLOCK_f = 0;
+
+/**/
 void ConfigMPU9250() {
 	// wake up device
 	I2CWriteByte(MPU9250_ADDR, MPUREG_PWR_MGMT_1, 0x00); // Clear sleep mode bit (6), enable all sensors
@@ -565,11 +575,7 @@ void GetAres() {
 	}
 }
 
-bool samplingFlag = false;
-uint32_t cycles1 = 0;
-uint32_t cycles1_ant = 0;
-float cycles1f = 0;
-float CLOCK_f = 0;
+
 
 float Now() {
 	//	UARTprintf("delay deltat=%d beta:%d - dif_cycles1:%d\n ",(uint32_t)(deltat*1000),(uint32_t)(beta*1000),(cycles1-cycles1_ant));
@@ -700,19 +706,7 @@ void Setup() {
 	}
 }
 
-//---------------------------------------------------------------------------------------------------
-// Fast inverse square-root
-// See: http://en.wikipedia.org/wiki/Fast_inverse_square_root
 
-float invSqrtf(float x) {
-	float halfx = 0.5f * x;
-	float y = x;
-	long i = *(long*) &y;
-	i = 0x5f3759df - (i >> 1);
-	y = *(float*) &i;
-	y = y * (1.5f - (halfx * y * y));
-	return y;
-}
 //---------------------------------------------------------------------------------------------------
 // IMU algorithm update
 

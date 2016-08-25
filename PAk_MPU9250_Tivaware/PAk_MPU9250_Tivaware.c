@@ -47,11 +47,13 @@
 /////////////////////
 
 #include "I2C/I2C_pak.h"
-#include "MPU9250/MPU9250.h"
+//#include "MPU9250/MPU9250.h"
+
+#include "include.h"
 
 
 
-extern float deltat;
+//extern float deltat;
 
 //*****************************************************************************
 //
@@ -201,17 +203,38 @@ int main(void) {
 	UARTprintf("\r I2CBusScan I2C2_BASE\n");
 	I2CBusScan(I2C2_BASE);
 
-	//
-	// Reset MPU9250
-	//
-	UARTprintf("\r ResetMPU9250 ResetMPU9250\n");
-	ResetMPU9250();
+	bool MPU9150_or_MPU9250=false;//false for MPU9150 - true for MPU9250
 
-	//
-	// Setup MPU9250 (Calibration, Init, etc)
-	//
-	UARTprintf("\r Setup MPU9250\n");
-	Setup();
+	if (MPU9150_or_MPU9250)
+	{
+		//
+		// Reset MPU9250
+		//
+		UARTprintf("\r ResetMPU9250 ResetMPU9250\n");
+		ResetMPU9250();
+
+		//
+		// Setup MPU9250 (Calibration, Init, etc)
+		//
+		UARTprintf("\r Setup MPU9250\n");
+		Setup();
+	}
+	else
+	{
+
+		//
+		// Reset MPU9150
+		//
+		UARTprintf("\r ResetMPU9150 ResetMPU9150\n");
+		ResetMPU9150();
+
+		//
+		// Setup MPU9250 (Calibration, Init, etc)
+		//
+		UARTprintf("\r Setup MPU9150\n");
+		Setup_MPU9150();
+	}
+
 
 	//
 	// Configure Port N1 for as an output for the animation LED.
@@ -242,10 +265,19 @@ int main(void) {
 	UARTprintf("LOOPING!!\n");
 	while (1) {
 
-		UpdateData();
+		if (MPU9150_or_MPU9250)
+			{
+				UpdateData();
+				//better via interrupt
+				delayMS(6);    //MPU9250 is configured at 200Hz, so enough
+			}
+		else
+		{
+			UpdateData_MPU9150();
+					delayMS(6);
+		}
 
-		//better via interrupt
-		delayMS(6);    //MPU9250 is configured at 200Hz, so enough
+
 
 	}
 }
