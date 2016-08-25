@@ -1,7 +1,7 @@
 # MPU9250-Tivaware
 An i2c MPU9250 with TM4C129X Tivaware first approach
 
-![ScreenShot](http://www.naylampmechatronics.com/880/modulo-mpu9250-acelerometro-giroscopio-magnetometro-i2c.jpg)
+![ScreenShot](http://hobbycomponents.com/1844-large_default/mpu9250-9-axis-9dof-acc-gyro-compass-module.jpg)
 
 Processing sketch for real time viewing included:
 
