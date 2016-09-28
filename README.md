@@ -1,5 +1,5 @@
 # MPU9250-Tivaware
-An i2c MPU9250 and MPU9150 with TM4C129XTivaware first approach
+An i2c MPU9250 and MPU9150 with TM4C129X Tivaware first approach
 
 <img src="http://des.igogo.es/uploads/2015/201509/heditor/201509231442478751.jpg" width="400">
 
